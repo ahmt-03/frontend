@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-.MuiBox-root.MuiBox-root-179.makeStyles-resultBox-14 {
-	overflow-y: hidden;
+.makeStyles-resultBox-14 {
+	overflow-y: hidden !important;
 }
