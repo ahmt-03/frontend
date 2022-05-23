@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiBox-root.MuiBox-root-179.makeStyles-resultBox-14 {
+	overflow-y: hidden;
+}
