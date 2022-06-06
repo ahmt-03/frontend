@@ -66,8 +66,8 @@ function PapersWithCode() {
 		<div className={classes.root}>
 			<SearchBar
 				value={search}
-				onChange={(newValue) => {
-					setSearch(newValue);
+				onBlur={(e) => {
+					setSearch(e.target.value);
 				}}
 				onRequestSearch={() => {
 					const parameters = queryString.parseUrl(PAPERS_WITH_CODE_URL);
