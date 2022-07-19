@@ -76,6 +76,16 @@ function PapersWithCode() {
 					parameters.query.q = search;
 					setUrl(queryString.stringifyUrl(parameters));
 				}}
+				onKeyPress= {(e) => {
+					if (e.key === 'Enter') {
+						setSearch(e.target.value);
+						const parameters = queryString.parseUrl(PAPERS_WITH_CODE_URL);
+						parameters.query.v = 'lst';
+						parameters.query.o = 'match';
+						parameters.query.q = e.target.value;
+						setUrl(queryString.stringifyUrl(parameters));
+					}
+				}}
 			/>
 			{isLoading ? (
 				<Fragment>
