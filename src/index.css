@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
-.makeStyles-resultBox-14 {
+.makeStyles-resultBox-14{
 	overflow-y: hidden !important;
+	max-height: 100% !important; 
+	height: 99.6%;
+    overflow-x: hidden;
+}
+
+.MuiBox-root.MuiBox-root-84,
+.MuiBox-root.MuiBox-root-201,
+.MuiBox-root.MuiBox-root-143,
+.MuiBox-root.MuiBox-root-141,
+.MuiBox-root.MuiBox-root-108 {
+	padding-top: 2px !important;
+	padding-bottom: 40px;
 }
