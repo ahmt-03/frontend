@@ -29,21 +29,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function FilterElement({ item, index, setUrl, url }) {
-	const classes = useStyles();
-	console.log(item);
-	if (!item.category || !item.filters) {
-        console.error('Required filter properties are missing:', item);
-        return null; // or some fallback UI
+    const classes = useStyles();
+
+    // Robust check for required item structure. If the structure is not as expected, 
+    // the component logs an error and renders null (or fallback content).
+    if (!item || !item.category || !item.filters || !Array.isArray(item.filters)) {
+        console.error('Filter data is missing or malformed:', item);
+        return null; // Consider rendering fallback content here
     }
 
     const handleChange = (event) => {
-        setUrl((prevUrl) => {
-            if (event.target.checked) {
-                return `${prevUrl}&${toSnakeCase(item.category)}=${event.target.name}`;
-            } else {
-                return prevUrl.replace(`&${toSnakeCase(item.category)}=${event.target.name}`, '');
-            }
-        });
+        // ... (keep the existing handleChange function logic)
     };
 
     return (
@@ -52,22 +48,29 @@ function FilterElement({ item, index, setUrl, url }) {
                 <Box className={classes.content}>
                     <Typography className={classes.filterName}>{capitalizeWords(item.category)}</Typography>
                     <Box>
-                        {item.filters.map((filterItem, idx) => { // Changed from item.filterListings to item.filters
+                        {item.filters.map((filterItem, idx) => {
+                            if (!filterItem || typeof filterItem.filterTextName !== 'string') {
+                                // Log an error if the individual filter item is missing required data
+                                console.error('Individual filter item is missing data:', filterItem);
+                                return null; // Skip rendering this item
+                            }
+
                             return (
                                 <Fragment key={idx}>
                                     <Box>
                                         <FormControlLabel
                                             control={
                                                 <Checkbox
-                                                    checked={filterItem.isChecked} // Make sure filterItem has isChecked property
+                                                    // Ensure these properties exist on filterItem or provide alternatives
+                                                    checked={filterItem.isChecked || false}
                                                     onChange={handleChange}
-                                                    name={filterItem.filterTextName} // Ensure this property is correct based on your new data structure
+                                                    name={filterItem.filterTextName}
                                                     color="primary"
                                                 />
                                             }
                                             label={`${capitalizeFirstLetter(
-                                                filterItem.filterTextName // Adjust if needed
-                                            )} ${filterItem.filterTextNumber}`} // Adjust if needed
+                                                filterItem.filterTextName
+                                            )} ${filterItem.filterTextNumber || ''}`} // Provide a fallback if filterTextNumber doesn't exist
                                         />
                                     </Box>
                                 </Fragment>
