@@ -43,7 +43,7 @@ function FilterElement({ item, index, setUrl, url }) {
 				<Box className={classes.content}>
 					<Typography className={classes.filterName}>{capitalizeWords(item.filterHeading)}</Typography>
 					<Box>
-						{item.filterListings.map((filterItem, idx) => {
+						{item.filterListings&&item.filterListings.map((filterItem, idx) => {
 							return (
 								<Fragment key={idx}>
 									<Box>

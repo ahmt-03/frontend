@@ -63,6 +63,7 @@ function Zenodo() {
 	const [ search, setSearch ] = useState('');
 	const [ url, setUrl ] = useState('');
 	const { isLoading, data } = useQuery([ `zenodo`, url ], () => fetchScraperData(url));
+	console.log(data)
 	return (
 		<div className={classes.root}>
 			<SearchBar
@@ -91,7 +92,7 @@ function Zenodo() {
 						<Box className={classes.filterBox}>
 							<SearchFilterElement search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
 							{data.filters.map((item, index) => {
-								if (item.filterListings.length === 0) {
+								if (item&&item.filterListings&&item.filterListings.length === 0) {
 									return null;
 								}
 								return (
@@ -120,7 +121,7 @@ function Zenodo() {
 							<Box className={classes.filterBox}>
 								<SearchFilterElement search={search} setSearch={setSearch} url={url} setUrl={setUrl} />
 								{data.filters.map((item, index) => {
-									if (item.filterListings.length === 0) {
+									if (item.filterListings&&item.filterListings.length === 0) {
 										return null;
 									}
 									return (
