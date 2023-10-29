@@ -30,14 +30,13 @@ const useStyles = makeStyles((theme) => ({
 
 function FilterElement({ item, index, setUrl, url }) {
 	const classes = useStyles();
+	console.log(item);
 	const handleChange = (event) => {
-		setUrl((prevUrl) => {
-			if (event.target.checked) {
-				return `${prevUrl}&${toSnakeCase(item.filterHeading)}=${event.target.name}`;
-			} else {
-				return prevUrl.replace(`&${toSnakeCase(item.filterHeading)}=${event.target.name}`, '');
-			}
-		});
+		if (event.target.checked) {
+			setUrl((url += `&${toSnakeCase(item.filterHeading)}=${event.target.name}`));
+		} else {
+			setUrl((url = url.replace(`&${toSnakeCase(item.filterHeading)}=${event.target.name}`, '')));
+		}
 	};
 	return (
 		<Fragment key={index}>
