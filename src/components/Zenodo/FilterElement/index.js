@@ -49,7 +49,7 @@ function FilterElement({ item, index, setUrl, url }) {
                     <Typography className={classes.filterName}>{capitalizeWords(item.category)}</Typography>
                     <Box>
                         {item.filters.map((filterItem, idx) => {
-                            if (!filterItem || typeof filterItem.filterTextName !== 'string') {
+                            if (!filterItem || typeof filterItem.filterName !== 'string') {
                                 // Log an error if the individual filter item is missing required data
                                 console.error('Individual filter item is missing data:', filterItem);
                                 return null; // Skip rendering this item
@@ -64,13 +64,11 @@ function FilterElement({ item, index, setUrl, url }) {
                                                     // Ensure these properties exist on filterItem or provide alternatives
                                                     checked={filterItem.isChecked || false}
                                                     onChange={handleChange}
-                                                    name={filterItem.filterTextName}
+                                                    name={filterItem.filterName}
                                                     color="primary"
                                                 />
                                             }
-                                            label={`${capitalizeFirstLetter(
-                                                filterItem.filterTextName
-                                            )} ${filterItem.filterTextNumber || ''}`} // Provide a fallback if filterTextNumber doesn't exist
+                                            label={`${capitalizeFirstLetter(filterItem.filterName)} ${filterItem.filterCount || ''}`} // Provide a fallback if filterTextNumber doesn't exist
                                         />
                                     </Box>
                                 </Fragment>
