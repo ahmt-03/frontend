@@ -31,15 +31,16 @@ const useStyles = makeStyles((theme) => ({
 function FilterElement({ item, index, setUrl, url }) {
     const classes = useStyles();
 
-    // Robust check for required item structure. If the structure is not as expected, 
-    // the component logs an error and renders null (or fallback content).
     if (!item || !item.category || !item.filters || !Array.isArray(item.filters)) {
-        console.error('Filter data is missing or malformed:', item);
-        return null; // Consider rendering fallback content here
+        return null;
     }
 
     const handleChange = (event) => {
-        // ... (keep the existing handleChange function logic)
+        if (event.target.checked) {
+            setUrl((url += `&${toSnakeCase(item.category)}=${event.target.name}`));
+        } else {
+            setUrl((url = url.replace(`&${toSnakeCase(item.category)}=${event.target.name}`, '')));
+        }
     };
 
     return (
@@ -50,8 +51,6 @@ function FilterElement({ item, index, setUrl, url }) {
                     <Box>
                         {item.filters.map((filterItem, idx) => {
                             if (!filterItem || typeof filterItem.filterName !== 'string') {
-                                // Log an error if the individual filter item is missing required data
-                                console.error('Individual filter item is missing data:', filterItem);
                                 return null; // Skip rendering this item
                             }
 
@@ -61,7 +60,7 @@ function FilterElement({ item, index, setUrl, url }) {
                                         <FormControlLabel
                                             control={
                                                 <Checkbox
-                                                    // Ensure these properties exist on filterItem or provide alternatives
+                                                  
                                                     checked={filterItem.isChecked || false}
                                                     onChange={handleChange}
                                                     name={filterItem.filterName}
