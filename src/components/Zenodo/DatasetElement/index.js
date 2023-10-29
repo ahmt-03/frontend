@@ -50,13 +50,7 @@ function DatasetElement({ item, index }) {
 					</Typography>
 					<br />
 					<Box>
-						{item.description.map((des, index) => {
-							return (
-								<Typography className={classes.spanClass} key={index}>
-									{des}
-								</Typography>
-							);
-						})}
+						{item.description}
 					</Box>
 				</Grid>
 			</Grid>

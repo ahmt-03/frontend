@@ -7,6 +7,7 @@ export function capitalizeFirstLetter(string) {
 }
 
 export function capitalizeWords(string) {
+	string=string?string:""
 	return string.replace(/(?:^|\s)\S/g, function(a) {
 		return a.toUpperCase();
 	});
@@ -20,7 +21,7 @@ export const toSnakeCase = (str) =>
 		.join('_');
 
 export const API_ENDPOINT = 'https://nodescraperbackend.herokuapp.com';
-// export const API_ENDPOINT = 'http://localhost:5000';
+//export const API_ENDPOINT = 'http://localhost:5000';
 
 export const PAPERS_WITH_CODE_URL = 'https://paperswithcode.com/datasets';
 
