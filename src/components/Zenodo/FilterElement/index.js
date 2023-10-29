@@ -31,45 +31,53 @@ const useStyles = makeStyles((theme) => ({
 function FilterElement({ item, index, setUrl, url }) {
 	const classes = useStyles();
 	console.log(item);
-	const handleChange = (event) => {
-		if (event.target.checked) {
-			setUrl((url += `&${toSnakeCase(item.filterHeading)}=${event.target.name}`));
-		} else {
-			setUrl((url = url.replace(`&${toSnakeCase(item.filterHeading)}=${event.target.name}`, '')));
-		}
-	};
-	return (
-		<Fragment key={index}>
-			<Box className={classes.root}>
-				<Box className={classes.content}>
-					<Typography className={classes.filterName}>{capitalizeWords(item.filterHeading)}</Typography>
-					<Box>
-						{item.filterListings&&item.filterListings.map((filterItem, idx) => {
-							return (
-								<Fragment key={idx}>
-									<Box>
-										<FormControlLabel
-											control={
-												<Checkbox
-													checked={filterItem.isChecked}
-													onChange={handleChange}
-													name={filterItem.filterTextName}
-													color="primary"
-												/>
-											}
-											label={`${capitalizeFirstLetter(
-												filterItem.filterTextName
-											)} ${filterItem.filterTextNumber}`}
-										/>
-									</Box>
-								</Fragment>
-							);
-						})}
-					</Box>
-				</Box>
-			</Box>
-		</Fragment>
-	);
+	if (!item.category || !item.filters) {
+        console.error('Required filter properties are missing:', item);
+        return null; // or some fallback UI
+    }
+
+    const handleChange = (event) => {
+        setUrl((prevUrl) => {
+            if (event.target.checked) {
+                return `${prevUrl}&${toSnakeCase(item.category)}=${event.target.name}`;
+            } else {
+                return prevUrl.replace(`&${toSnakeCase(item.category)}=${event.target.name}`, '');
+            }
+        });
+    };
+
+    return (
+        <Fragment key={index}>
+            <Box className={classes.root}>
+                <Box className={classes.content}>
+                    <Typography className={classes.filterName}>{capitalizeWords(item.category)}</Typography>
+                    <Box>
+                        {item.filters.map((filterItem, idx) => { // Changed from item.filterListings to item.filters
+                            return (
+                                <Fragment key={idx}>
+                                    <Box>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={filterItem.isChecked} // Make sure filterItem has isChecked property
+                                                    onChange={handleChange}
+                                                    name={filterItem.filterTextName} // Ensure this property is correct based on your new data structure
+                                                    color="primary"
+                                                />
+                                            }
+                                            label={`${capitalizeFirstLetter(
+                                                filterItem.filterTextName // Adjust if needed
+                                            )} ${filterItem.filterTextNumber}`} // Adjust if needed
+                                        />
+                                    </Box>
+                                </Fragment>
+                            );
+                        })}
+                    </Box>
+                </Box>
+            </Box>
+        </Fragment>
+    );
 }
 
 export default FilterElement;

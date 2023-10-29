@@ -46,7 +46,7 @@ function FilterElement({ item, index, bodyAttributes, setBodyAttributes }) {
 				<Box className={classes.content}>
 					<Typography className={classes.filterName}>{item.filterItemHeading}</Typography>
 					<Box>
-						{item.filterListings&&item.filterListings.map((filterItem, idx) => {
+					{item.filterListings.map((filterItem, idx) => {
 							return (
 								<Fragment key={idx}>
 									<Box>
