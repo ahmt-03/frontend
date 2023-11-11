@@ -27,3 +27,12 @@ code {
 	padding-top: 2px !important;
 	padding-bottom: 40px;
 }
+
+
+.MuiBox-root-187 > .makeStyles-root-188:nth-child(even) {
+  display: none;
+}
+.MuiBox-root.MuiBox-root-79 .MuiBox-root.MuiBox-root-81,
+.MuiBox-root.MuiBox-root-79 .MuiBox-root.MuiBox-root-105 {
+  display: none;
+}
