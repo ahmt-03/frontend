@@ -29,6 +29,11 @@ code {
 }
 
 
+.makeStyles-filterBox-15 .MuiBox-root.MuiBox-root-143,
+.makeStyles-filterBox-15 .MuiBox-root.MuiBox-root-141 {
+  padding-bottom: 1px;
+}
+
 .MuiBox-root-187 > .makeStyles-root-188:nth-child(even) {
   display: none;
 }
